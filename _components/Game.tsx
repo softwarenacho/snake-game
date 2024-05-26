@@ -158,14 +158,12 @@ const Game = () => {
   }, []);
 
   return (
-    <main
-      className={styles.main ? styles.main : 'hidden'}
-      onTouchStart={handleTouchStart}
-      onTouchEnd={handleTouchEnd}
-    >
+    <main className={styles.main ? styles.main : 'hidden'}>
       <h1>Nacho{`'`}s Snake Game</h1>
       <div
         className={styles.game}
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
         style={{
           filter: gameOver ? 'grayscale(1)' : 'drop-shadow(5px 5px 2px black)',
           width: `${gameAreaSize}px`,
@@ -193,10 +191,11 @@ const Game = () => {
             key={index}
             className={styles.snake}
             style={{
-              left: segment.x + 1.5,
-              top: segment.y + 1.5,
-              width: `${gridSize - 3}px`,
-              height: `${gridSize - 3}px`,
+              left: segment.x + 1,
+              top: segment.y + 1,
+              width: `${gridSize - 2}px`,
+              height: `${gridSize - 2}px`,
+              zIndex: snake.length - index + 2,
             }}
           ></div>
         ))}
@@ -221,7 +220,7 @@ const Game = () => {
       </h2>
       {!gameOver && !(direction.x === 0 && direction.y === 0) && (
         <>
-          <p>
+          <p className={styles.press}>
             Press {`"Space"`} to {paused ? 'resume' : 'pause'} the game
           </p>
           <button
