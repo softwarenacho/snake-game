@@ -133,7 +133,7 @@ const Game = () => {
       <div
         className={styles.game}
         style={{
-          filter: gameOver ? 'grayscale(1)' : 'none',
+          filter: gameOver ? 'grayscale(1)' : 'drop-shadow(5px 5px 2px black)',
           width: `${gameAreaSize}px`,
           height: `${gameAreaSize}px`,
           background: `
@@ -176,6 +176,7 @@ const Game = () => {
           }}
         ></div>
       </div>
+      {gameOver && <p className={styles.gameOver}>Game Over</p>}
       <h2
         style={{
           color: gameOver ? '#76c442' : '',
@@ -184,7 +185,6 @@ const Game = () => {
       >
         Score: <span>{score}</span>
       </h2>
-      {gameOver && <p className={styles.gameOver}>Game Over</p>}
       {!gameOver && !(direction.x === 0 && direction.y === 0) && (
         <>
           <p>

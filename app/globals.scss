@@ -29,16 +29,15 @@ button {
   justify-content: center;
   align-items: center;
   border: none;
-  border-radius: 0;
-  font-size: 120%;
+  border-radius: 5px;
+  font-size: 100%;
   padding: 1rem;
   font-family: inherit;
   color: white;
   cursor: pointer;
-  filter: drop-shadow(5px 5px 2px black);
   &:hover {
     filter: drop-shadow(-5px -5px 2px black);
-    font-size: 130%;
+    font-size: 110%;
   }
 }
 

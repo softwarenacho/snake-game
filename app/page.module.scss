@@ -56,25 +56,37 @@
   align-items: center;
   overflow: hidden;
   border-radius: 5px;
-  filter: drop-shadow(5px 5px 5px black);
+  filter: drop-shadow(2px 2px 2px black);
   &:hover {
-    filter: drop-shadow(-5px -5px 5px black);
-    font-size: 130%;
+    filter: drop-shadow(-2px -2px 2px black) !important;
   }
 }
 
 .gameOver {
   color: #7d0641;
   font-weight: bold;
-  animation: fadeIn 1s ease-in-out;
+  animation: fadeIn 1s ease-in-out forwards;
+  background: #d0d0d0;
+  padding: 1rem 10rem;
+  border-top: 20px solid #7d0641;
+  border-radius: 5px;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+  filter: drop-shadow(2px 2px 2px black);
+  &:hover {
+    filter: drop-shadow(-2px -2px 2px black);
+    font-size: 130%;
+  }
 }
 
 @keyframes fadeIn {
   from {
     opacity: 0;
+    font-size: 100%;
   }
   to {
     opacity: 1;
+    font-size: 150%;
   }
 }
 
