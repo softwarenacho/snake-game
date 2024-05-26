@@ -9,6 +9,7 @@
   gap: 2rem;
   margin-top: 1rem;
   user-select: none;
+  overscroll-behavior-y: none;
   p {
     display: flex;
     justify-content: center;
@@ -69,9 +70,7 @@
   background: #d0d0d0;
   padding: 1rem 10rem;
   border-top: 20px solid #7d0641;
-  border-radius: 5px;
-  border-bottom-left-radius: 12px;
-  border-bottom-right-radius: 12px;
+  border-radius: 12px;
   filter: drop-shadow(2px 2px 2px black);
   &:hover {
     filter: drop-shadow(-2px -2px 2px black);
@@ -92,8 +91,11 @@
 
 .snake,
 .point {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: absolute;
-  border-radius: 50%;
+  border-radius: 5px;
   background-color: #faca3c;
   filter: drop-shadow(1px 1px 1px black);
   &:hover {
@@ -102,6 +104,5 @@
 }
 
 .point {
-  border-radius: 5px;
   background-color: #7d0641;
 }

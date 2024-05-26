@@ -1,5 +1,5 @@
 'use client';
-import { useCallback, useEffect, useState } from 'react';
+import { TouchEvent, useCallback, useEffect, useState } from 'react';
 
 type Position = {
   x: number;
@@ -19,6 +19,36 @@ const Game = () => {
   const [score, setScore] = useState(0);
   const [paused, setPaused] = useState(false);
   const [gameOver, setGameOver] = useState(false);
+  const [touchStartX, setTouchStartX] = useState<number>(0);
+  const [touchStartY, setTouchStartY] = useState<number>(0);
+
+  const handleTouchStart = (e: TouchEvent<HTMLDivElement>): void => {
+    const touch = e.touches[0];
+    setTouchStartX(touch.clientX);
+    setTouchStartY(touch.clientY);
+  };
+
+  const handleTouchEnd = (e: TouchEvent<HTMLDivElement>): void => {
+    const touch = e.changedTouches[0];
+    const touchEndX = touch.clientX;
+    const touchEndY = touch.clientY;
+    const deltaX = touchEndX - touchStartX;
+    const deltaY = touchEndY - touchStartY;
+    e.preventDefault();
+    if (Math.abs(deltaX) > Math.abs(deltaY)) {
+      if (deltaX > 0) {
+        if (!paused) setDirection({ x: 1, y: 0 }); // right
+      } else {
+        if (!paused) setDirection({ x: -1, y: 0 }); // left
+      }
+    } else {
+      if (deltaY > 0) {
+        if (!paused) setDirection({ x: 0, y: 1 }); // up
+      } else {
+        if (!paused) setDirection({ x: 0, y: -1 }); // down
+      }
+    }
+  };
 
   const createPoint = useCallback(() => {
     const newPoint = {
@@ -128,7 +158,11 @@ const Game = () => {
   }, []);
 
   return (
-    <main className={styles.main ? styles.main : 'hidden'}>
+    <main
+      className={styles.main ? styles.main : 'hidden'}
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
+    >
       <h1>Nacho{`'`}s Snake Game</h1>
       <div
         className={styles.game}
@@ -159,10 +193,10 @@ const Game = () => {
             key={index}
             className={styles.snake}
             style={{
-              left: segment.x,
-              top: segment.y,
-              width: `${gridSize}px`,
-              height: `${gridSize}px`,
+              left: segment.x + 1.5,
+              top: segment.y + 1.5,
+              width: `${gridSize - 3}px`,
+              height: `${gridSize - 3}px`,
             }}
           ></div>
         ))}
