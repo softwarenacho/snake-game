@@ -68,7 +68,7 @@
   font-weight: bold;
   animation: fadeIn 1s ease-in-out forwards;
   background: #d0d0d0;
-  padding: 1rem 10rem;
+  padding: 1rem 5rem;
   border-top: 20px solid #7d0641;
   border-radius: 12px;
   filter: drop-shadow(2px 2px 2px black);
@@ -81,17 +81,6 @@
 .press {
   @media screen and (max-width: 600px) {
     display: none !important;
-  }
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    font-size: 100%;
-  }
-  to {
-    opacity: 1;
-    font-size: 150%;
   }
 }
 
@@ -110,5 +99,28 @@
 }
 
 .point {
-  background-color: #7d0641;
+  background: url(/icons/point.svg);
+  background-size: contain;
+  animation: appear 1s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    font-size: 100%;
+  }
+  to {
+    opacity: 1;
+    font-size: 150%;
+  }
+}
+
+@keyframes appear {
+  from {
+    opacity: 0.5;
+  }
+  to {
+    opacity: 1;
+    transform: rotate(180deg);
+  }
 }

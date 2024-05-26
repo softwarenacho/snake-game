@@ -157,6 +157,8 @@ const Game = () => {
     getStyles();
   }, []);
 
+  const pointItem = useCallback(() => {}, []);
+
   return (
     <main className={styles.main ? styles.main : 'hidden'}>
       <h1>Nacho{`'`}s Snake Game</h1>
@@ -200,6 +202,7 @@ const Game = () => {
           ></div>
         ))}
         <div
+          key={`${point ? point.x + point.y : 'point'}`}
           className={styles.point}
           style={{
             left: point ? point.x : -(gameAreaSize / 4),
