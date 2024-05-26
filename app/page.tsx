@@ -1,5 +1,5 @@
-import styles from './page.module.css';
+import Game from '@/_components/Game';
 
 export default function Home() {
-  return <main className={styles.main}>Snake</main>;
+  return <Game />;
 }

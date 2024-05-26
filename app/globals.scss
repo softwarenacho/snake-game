@@ -1,0 +1,43 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  transition: all;
+  font-family: monospace;
+}
+
+body {
+  height: 100vh;
+  background: #808080;
+  color: white;
+  font-size: 120%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  border-radius: 0;
+  font-size: 120%;
+  padding: 1rem;
+  font-family: inherit;
+  color: white;
+  cursor: pointer;
+  filter: drop-shadow(5px 5px 2px black);
+  &:hover {
+    filter: drop-shadow(-5px -5px 2px black);
+    font-size: 130%;
+  }
+}
