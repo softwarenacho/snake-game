@@ -1,5 +1,6 @@
 'use client';
 import { TouchEvent, useCallback, useEffect, useState } from 'react';
+import useSound from '../_utils/useSound';
 
 type Position = {
   x: number;
@@ -21,6 +22,9 @@ const Game = () => {
   const [gameOver, setGameOver] = useState(false);
   const [touchStartX, setTouchStartX] = useState<number>(0);
   const [touchStartY, setTouchStartY] = useState<number>(0);
+
+  const pointSound = useSound('/sounds/collect.mp3');
+  const gameOverSound = useSound('/sounds/game-over.mp3');
 
   const handleTouchStart = (e: TouchEvent<HTMLDivElement>): void => {
     const touch = e.touches[0];
@@ -67,13 +71,22 @@ const Game = () => {
       const newSnake = [newHead, ...prevSnake];
       if (point && newHead.x === point.x && newHead.y === point.y) {
         setScore(score + 1);
+        pointSound();
         createPoint();
       } else {
         newSnake.pop();
       }
       return newSnake;
     });
-  }, [direction.x, direction.y, gridSize, point, score, createPoint]);
+  }, [
+    direction.x,
+    direction.y,
+    gridSize,
+    point,
+    score,
+    pointSound,
+    createPoint,
+  ]);
 
   const checkCollision = useCallback((): boolean => {
     const head = snake[0];
@@ -144,10 +157,11 @@ const Game = () => {
       if (checkCollision()) {
         setPaused(true);
         setGameOver(true);
+        gameOverSound();
       }
     }, gameSpeed);
     return () => clearInterval(interval);
-  }, [updateSnake, checkCollision, paused, gameSpeed]);
+  }, [updateSnake, checkCollision, paused, gameSpeed, gameOverSound]);
 
   useEffect(() => {
     const getStyles = async () => {
@@ -156,8 +170,6 @@ const Game = () => {
     };
     getStyles();
   }, []);
-
-  const pointItem = useCallback(() => {}, []);
 
   return (
     <main className={styles.main ? styles.main : 'hidden'}>
@@ -254,8 +266,8 @@ const Game = () => {
           <span>
             <i
               onClick={() => {
-                const speed = gameSpeed - 50;
-                if (speed > 0) setGameSpeed(speed);
+                const speed = gameSpeed + 50;
+                if (speed <= 1000) setGameSpeed(speed);
               }}
             >
               -
@@ -263,8 +275,8 @@ const Game = () => {
             {(200 / gameSpeed).toFixed(2)}x
             <i
               onClick={() => {
-                const speed = gameSpeed + 50;
-                if (speed <= 1000) setGameSpeed(speed);
+                const speed = gameSpeed - 50;
+                if (speed > 0) setGameSpeed(speed);
               }}
             >
               +
