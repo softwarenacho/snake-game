@@ -1,6 +1,5 @@
 'use client';
 import { useCallback, useEffect, useState } from 'react';
-import styles from '../app/page.module.scss';
 
 type Position = {
   x: number;
@@ -8,6 +7,7 @@ type Position = {
 };
 
 const Game = () => {
+  const [styles, setStyles] = useState<{ [key: string]: string }>({});
   const [gameSpeed, setGameSpeed] = useState(200);
   const [gameAreaSize, setGameAreaSize] = useState(400);
   const [gridSize, setGridSize] = useState(20);
@@ -119,8 +119,16 @@ const Game = () => {
     return () => clearInterval(interval);
   }, [updateSnake, checkCollision, paused, gameSpeed]);
 
+  useEffect(() => {
+    const getStyles = async () => {
+      const styleFile = (await import('../app/page.module.scss')).default;
+      setStyles(styleFile);
+    };
+    getStyles();
+  }, []);
+
   return (
-    <main className={styles.main}>
+    <main className={styles.main ? styles.main : 'hidden'}>
       <h1>Nacho{`'`}s Snake Game</h1>
       <div
         className={styles.game}
@@ -170,7 +178,7 @@ const Game = () => {
       </div>
       <h2
         style={{
-          color: gameOver ? '#76c442' : '#a6d6d8',
+          color: gameOver ? '#76c442' : '',
           fontSize: gameOver ? '150%' : '125%',
         }}
       >

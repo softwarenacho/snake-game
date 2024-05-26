@@ -1,5 +1,6 @@
 {
-  "name": "Snake Game",
+  "name": "Nacho's Snake Game",
+  "version": "0.9.1",
   "short_name": "Snake",
   "id": "snake-game",
   "description": "JS Snake game with basic controls for game configuration",
@@ -39,16 +40,10 @@
   ],
   "screenshots": [
     {
-      "src": "/screenshots/Main 1200x1362.webp",
-      "sizes": "1200x1362",
+      "src": "/screenshots/Initial 1702x1902.webp",
+      "sizes": "1702x1902",
       "type": "image/webp",
       "form_factor": "narrow",
-      "label": "Nacho's Snake Game"
-    },
-    {
-      "src": "/screenshots/Initial 1702x1902.webp",
-      "sizes": "1520x1088",
-      "type": "image/webp",
       "label": "Snake Game Initial Screen"
     },
     {
@@ -75,18 +70,6 @@
       "sizes": "1150x878",
       "type": "image/webp",
       "label": "Controls"
-    },
-    {
-      "src": "/screenshots/In Progress 1484x1512.webp",
-      "sizes": "1484x1512",
-      "type": "image/webp",
-      "label": "Game In Progress"
-    },
-    {
-      "src": "/screenshots/Paused 1472x1744.webp",
-      "sizes": "1472x1744",
-      "type": "image/webp",
-      "label": "Game Paused"
     }
   ],
   "launch_handler": {

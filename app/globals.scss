@@ -14,7 +14,7 @@ body {
 
 body {
   height: 100vh;
-  background: #808080;
+  background: #404040;
   color: white;
   font-size: 120%;
 }
@@ -40,4 +40,8 @@ button {
     filter: drop-shadow(-5px -5px 2px black);
     font-size: 130%;
   }
+}
+
+.hidden {
+  display: none;
 }
