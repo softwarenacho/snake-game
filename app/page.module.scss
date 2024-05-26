@@ -18,6 +18,7 @@
     align-items: center;
     flex-direction: column;
     gap: 0.5rem;
+    color: #a6d6d8;
     span {
       display: flex;
       justify-content: space-between;
@@ -26,6 +27,7 @@
       gap: 1rem;
       margin-top: 0.25rem;
       font-weight: bold;
+      color: white;
       i {
         display: flex;
         justify-content: center;
@@ -42,6 +44,15 @@
       }
     }
   }
+}
+
+.controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4rem;
+  margin-top: 4rem;
 }
 
 .game {
@@ -61,6 +72,16 @@
 .gameOver {
   color: #7d0641;
   font-weight: bold;
+  animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .snake,
@@ -68,6 +89,10 @@
   position: absolute;
   border-radius: 50%;
   background-color: #faca3c;
+  filter: drop-shadow(1px 1px 1px black);
+  &:hover {
+    filter: drop-shadow(-1px -1px 1px black);
+  }
 }
 
 .point {

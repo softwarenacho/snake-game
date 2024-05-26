@@ -7,7 +7,7 @@ type Position = {
   y: number;
 };
 
-const Game: React.FC = () => {
+const Game = () => {
   const [gameSpeed, setGameSpeed] = useState(200);
   const [gameAreaSize, setGameAreaSize] = useState(400);
   const [gridSize, setGridSize] = useState(20);
@@ -97,7 +97,7 @@ const Game: React.FC = () => {
           break;
         case ' ':
           event.preventDefault();
-          if (!gameOver) setPaused((prevPaused) => !prevPaused);
+          gameOver ? resetGame() : setPaused((prevPaused) => !prevPaused);
           break;
       }
     };
@@ -105,7 +105,7 @@ const Game: React.FC = () => {
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
     };
-  }, [direction, gameOver]);
+  }, [direction, gameOver, resetGame]);
 
   useEffect(() => {
     if (paused) return;
@@ -121,7 +121,7 @@ const Game: React.FC = () => {
 
   return (
     <main className={styles.main}>
-      <h1>Snake Game</h1>
+      <h1>Nacho{`'`}s Snake Game</h1>
       <div
         className={styles.game}
         style={{
@@ -171,79 +171,13 @@ const Game: React.FC = () => {
       <h2
         style={{
           color: gameOver ? '#76c442' : '#a6d6d8',
-          fontSize: gameOver ? '150%' : '100%',
+          fontSize: gameOver ? '150%' : '125%',
         }}
       >
         Score: <span>{score}</span>
       </h2>
       {gameOver && <p className={styles.gameOver}>Game Over</p>}
-      <p>
-        Speed:
-        <span>
-          <i
-            onClick={() => {
-              const speed = gameSpeed + 50;
-              if (speed <= 1000) setGameSpeed(speed);
-            }}
-          >
-            -
-          </i>
-          {gameSpeed / 200}
-          <i
-            onClick={() => {
-              const speed = gameSpeed - 50;
-              if (speed > 0) setGameSpeed(speed);
-            }}
-          >
-            +
-          </i>
-        </span>
-      </p>
-      <p>
-        Area Size:
-        <span>
-          <i
-            onClick={() => {
-              const area = gameAreaSize - gridSize;
-              if (area > 0) setGameAreaSize(area);
-            }}
-          >
-            -
-          </i>
-          {gameAreaSize / gridSize}
-          <i
-            onClick={() => {
-              const area = gameAreaSize + gridSize;
-              if (area <= 1000) setGameAreaSize(area);
-            }}
-          >
-            +
-          </i>
-        </span>
-      </p>
-      <p>
-        Grid Size:
-        <span>
-          <i
-            onClick={() => {
-              const grid = gridSize - 10;
-              if (grid > 0) setGridSize(grid);
-            }}
-          >
-            -
-          </i>
-          {gridSize}
-          <i
-            onClick={() => {
-              const grid = gridSize + 10;
-              if (grid <= 50) setGridSize(grid);
-            }}
-          >
-            +
-          </i>
-        </span>
-      </p>
-      {!gameOver && (
+      {!gameOver && !(direction.x === 0 && direction.y === 0) && (
         <>
           <p>
             Press {`"Space"`} to {paused ? 'resume' : 'pause'} the game
@@ -270,6 +204,74 @@ const Game: React.FC = () => {
           </button>
         </>
       )}
+      <div className={styles.controls}>
+        <p>
+          Speed:
+          <span>
+            <i
+              onClick={() => {
+                const speed = gameSpeed - 50;
+                if (speed > 0) setGameSpeed(speed);
+              }}
+            >
+              -
+            </i>
+            {(200 / gameSpeed).toFixed(2)}x
+            <i
+              onClick={() => {
+                const speed = gameSpeed + 50;
+                if (speed <= 1000) setGameSpeed(speed);
+              }}
+            >
+              +
+            </i>
+          </span>
+        </p>
+        <p>
+          Area Size:
+          <span>
+            <i
+              onClick={() => {
+                const area = gameAreaSize - gridSize;
+                if (area > 0) setGameAreaSize(area);
+              }}
+            >
+              -
+            </i>
+            {(gameAreaSize / gridSize).toFixed(2)}
+            <i
+              onClick={() => {
+                const area = gameAreaSize + gridSize;
+                if (area <= 1000) setGameAreaSize(area);
+              }}
+            >
+              +
+            </i>
+          </span>
+        </p>
+        <p>
+          Grid Size:
+          <span>
+            <i
+              onClick={() => {
+                const grid = gridSize - 10;
+                if (grid > 0) setGridSize(grid);
+              }}
+            >
+              -
+            </i>
+            {gridSize}
+            <i
+              onClick={() => {
+                const grid = gridSize + 10;
+                if (grid <= 50) setGridSize(grid);
+              }}
+            >
+              +
+            </i>
+          </span>
+        </p>
+      </div>
     </main>
   );
 };
