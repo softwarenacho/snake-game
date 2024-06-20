@@ -11,6 +11,7 @@ const useSound = (url: string) => {
 
   const play = () => {
     if (audio) {
+      audio.currentTime = 0;
       audio.play();
     }
   };
